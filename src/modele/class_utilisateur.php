@@ -75,9 +75,4 @@ class Utilisateur{
     }
 }   
 
-<<<<<<< HEAD
-//A REGLER PROBLEME DE LA REQUETE DE MOTS DE PASSE
-//A VOIR AVEC UTILISATEURMODIF HTML
-=======
->>>>>>> fixing updateMDP function
 ?>
