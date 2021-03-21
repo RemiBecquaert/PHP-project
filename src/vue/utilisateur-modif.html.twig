@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Modifier un utilisateur{% endblock %}
+{% block contenu %}
+{{ parent() }}
+
+
+{% if form.utilisateur is defined %}
+  {% if form.utilisateur != null %}
+<div class="container-fluid">
+  <form class="form" action="index.php?page=modifier" method="post" enctype="application/x-www-formurlencoded">
+    <h2>Modification des informations</h2>
+
+    <label for="email" class="sr-only">Modifier l'e-mail</label>
+      <input type="text" id="email" name="email" class="form-control" placeholder="Adresse e-mail" value="{{form.utilisateur.email}}"required autofocus></input>
+      
+    <label for="inputName" class="sr-only">Votre nom</label>
+      <input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" value="{{form.utilisateur.nom}}" required autofocus>
+    
+    <label for="inputFirstname" class="sr-only">Votre prénom</label>
+      <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Votre prénom" value="{{form.utilisateur.prenom}}"required autofocus>
+    
+    <label for="inputPassword" class="sr-only">Modifier le mot de passe</label>
+      <input type="password" id="mdp" name="mdp" class="form-control" placeholder="Modifier le mot de passe">
+    
+    <select class="form-control" name="role">
+      {% for r in form.roles %}
+        {% if r.id==form.utilisateur.idRole %}
+          <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+        {% else %}
+          <option value="{{ r.id }}">{{ r.libelle }}</option>
+        {% endif %}
+      {% endfor %} 
+    </select>
+    <input type="hidden" name="id" value="{{ form.utilisateur.id }}"/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier mes informations</button>
+  </form>
+</div>
+
+  {% else %}
+    <h2 class="alert alert-danger" role="alert">{{ form.message }}</h2>
+    <a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a>
+  {% endif %}
+
+{% else %}
+ {% if form.valide == true %}
+ <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+ <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>
+ {% else %}
+ <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+ <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=utilisateur">Retourner sur la liste des utilisateurs</a></h1>
+ {% endif %}
+{% endif %}
+
+<footer class="bg-light text-center text-lg-start">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-0">Accueil</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="index.php?page=inscrire" class="text-dark">S'inscrire</a>
+          </li>
+          {% if session.login is defined %}
+          {% else %}          
+          <li>
+            <a href="index.php?page=connexion" class="text-dark">Se connecter</a>
+          </li>
+          {% endif %}
+          <li>
+            <a href="index.php?page=contact" class="text-dark">Nous contacter</a>
+          </li>
+          <li>
+            <a href="index.php?page=mentions" class="text-dark">Mentions Légales</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2021 Tous droits réservés :
+    <a class="text-dark" href="index.php">Au Coin Chaud</a>
+  </div>
+</footer>
+
+{% endblock %}
