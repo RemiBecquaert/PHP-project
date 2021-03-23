@@ -3,6 +3,15 @@
 {% block contenu %}
 {{ parent() }}
 
+{% if form.etat is defined %}
+  {% if forme.etat == false %}
+    <h2 class="h3 mb-3 font-weight-normal">Suppression réussie</h2>
+    {% else %}
+    <h2 class="alert alert-danger" role="alert">Problème d'insertion</h2> 
+  {% endif %} 
+{% endif %} 
+
+<form class="form-signin" action="index.php?page=utilisateur" method="post" enctype="application/x-www-form-urlencoded">
 
 <div class="table-responsive"> 
     <table class="table">
@@ -12,7 +21,10 @@
             <th scope="col">Nom</th>       
             <th scope="col">Prénom</th>       
             <th scope="col">Rôle</th>
-            <th scope="col"></th>  
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
         </tr>   
     </thead>    
     <tbody> 
@@ -23,11 +35,15 @@
             <td>{{u.prenom}}</td>
             <td>{{u.libellerole}}</td>
             <td><a href="index.php?page=modifier&id={{u.id}}">Modifier</a></td>
+            <td><a href="index.php?page=utilisateur&id={{u.id}}">Supprimer</a></td>
+            <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{u.id}}"/></td>
         </tr>
 
     {% endfor %}        
     </tbody>   
-    </table> 
+    </table>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" name="btSupprimer">Supprimer</button>
+
 </div>
 
 <footer class="bg-light text-center text-lg-start">

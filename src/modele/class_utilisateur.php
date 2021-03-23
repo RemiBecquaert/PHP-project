@@ -8,6 +8,7 @@ class Utilisateur{
     private $selectById;
     private $update;
     private $updateMdp;
+    private $delete;
 
     public function __construct($db){
     $this->db = $db; 
@@ -17,6 +18,7 @@ class Utilisateur{
     $this->selectById = $db->prepare("select id, email, nom, prenom, idRole from utilisateur where id=:id");    
     $this->update = $db->prepare("update utilisateur set email =:email, nom=:nom, prenom=:prenom, idRole=:role where id=:id");
     $this->updateMdp = $db->prepare("update utilisateur set mdp=:mdp, email=:email, nom=:nom, prenom=:prenom, idRole=:role where id=:id");
+    $this->delete = $db->prepare("delete from utilisateur where id=:id");
 }
 
     
@@ -69,6 +71,16 @@ class Utilisateur{
         $this->updateMdp->execute(array(':id'=>$id, ':role'=>$role, ':email'=>$email, ':nom'=>$nom,':prenom'=>$prenom, ':mdp'=>$mdp));
         if ($this->updateMdp->errorCode()!=0){
             print_r($this->updateMdp->errorInfo());
+            $r=false;
+        }
+        return $r;
+    }
+
+    public function delete($id){
+        $r = true;
+        $this->delete->execute(array(':id'=>$id));
+        if ($this->delete->errorCode()!=0){
+            print_r($this->delete->errorInfo());
             $r=false;
         }
         return $r;
