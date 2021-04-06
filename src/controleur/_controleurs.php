@@ -8,4 +8,5 @@
     require_once 'maintenanceControleur.php';
     require_once 'disconnectControleur.php';
     require_once 'utilisateurControleur.php';
+    require_once 'commentairesControleur.php';
 ?>

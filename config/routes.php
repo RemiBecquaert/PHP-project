@@ -12,6 +12,7 @@ function getPage($db){
     $lesPages['deconnexion'] = "disconnectControleur";
     $lesPages['utilisateur'] = "utilisateurControleur";
     $lesPages['modifier'] = "utilisateurModifControleur";
+    $lesPages['commentaires'] = "commentairesControleur";
     
     if ($db!=null){
         if(isset($_GET['page'])){
